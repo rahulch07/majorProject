@@ -17,13 +17,13 @@ import { drawPoint, drawSegment } from '../../utils/helper'
 
 
 let skeletonColor = 'rgb(255,255,255)'
-let poseList = [
-  'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
-  'Shoulderstand', 'Traingle'
-]
+// let poseList = [
+//   'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
+//   'Shoulderstand', 'Traingle'
+// ]
 
-let typeList = [
-  'Back Pain', 'Neck & Shoulder Pain', 'Hip Pain', 'Knee Pain']
+// let typeList = [
+//   'Back Pain', 'Neck & Shoulder Pain', 'Hip Pain', 'Knee Pain']
 
 let interval
 
@@ -42,7 +42,45 @@ function Yoga() {
   const [poseTime, setPoseTime] = useState(0)
   const [bestPerform, setBestPerform] = useState(0)
   const [currentPose, setCurrentPose] = useState('Tree')
+  const [currentType, setCurrentType] = useState('BackPain')
   const [isStartPose, setIsStartPose] = useState(false)
+
+  let poseList
+let BackPain = [
+  'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
+  'Shoulderstand', 'Traingle'
+]
+
+let NeckShoulderPain = [
+  'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
+  'Shoulderstand', 'Traingle'
+]
+
+let HipPain = [
+  'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
+  'Shoulderstand', 'Traingle'
+]
+
+let KneePain = [
+  'Tree', 'Chair', 'Cobra', 'Warrior', 'Dog',
+  'Shoulderstand', 'Traingle'
+]
+
+let typeList = [
+  'BackPain', 'NeckShoulderPain', 'HipPain', 'KneePain']
+
+if(currentType==='BackPain'){
+  poseList = BackPain
+}
+else if(currentType==='NeckShoulderPain'){
+  poseList = NeckShoulderPain
+}
+else if(currentType==='HipPain'){
+  poseList = HipPain
+}
+else if(currentType==='KneePain'){
+  poseList = KneePain
+}
 
   
   useEffect(() => {
@@ -271,6 +309,38 @@ function Yoga() {
     <div
       className="yoga-container"
     >
+
+       <div
+        className='dropdown dropdown-container'
+         
+      >
+        <button 
+            className="btn btn-secondary dropdown-toggle"
+            type='button'
+            data-bs-toggle="dropdown"
+            id="pose-dropdown-btn"
+            aria-expanded="false"
+        >{currentType}
+        </button>
+        <ul class="dropdown-menu dropdown-custom-menu" aria-labelledby="dropdownMenuButton1">
+            {typeList.map((pose) => (
+                <li onClick={() => setCurrentType(pose)}>
+                    <div class="dropdown-item-container">
+                        <p className="dropdown-item-1">{pose}</p>
+                        {/* <img 
+                            src={poseImages[pose]}
+                            className="dropdown-img"
+                        /> */}
+                        
+                    </div>
+                </li>
+            ))}
+            
+        </ul>
+              
+          
+      </div>
+       
       <DropDown
         poseList={poseList}
         currentPose={currentPose}
